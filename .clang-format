@@ -1,0 +1,18 @@
+---
+BasedOnStyle: WebKit
+AlignAfterOpenBracket: Align
+AlwaysBreakTemplateDeclarations: 'Yes'
+ColumnLimit: '80'
+IndentCaseLabels: 'true'
+IndentWidth: '2'
+Language: Cpp
+ReflowComments: 'false'
+SortIncludes: 'true'
+SpaceAfterTemplateKeyword: 'false'
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: 'false'
+Standard: Auto
+TabWidth: '2'
+AccessModifierOffset: '-2'
+BreakBeforeBraces: Mozilla
+...
