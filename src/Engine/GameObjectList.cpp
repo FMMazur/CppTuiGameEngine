@@ -1,5 +1,4 @@
 #include "GameObjectList.hpp"
-#include "GameObject.hpp"
 
 bool GameObjectList::remove(const std::string& gameObjectName) { return false; }
 

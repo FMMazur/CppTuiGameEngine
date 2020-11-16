@@ -1,31 +1,32 @@
 #ifndef __COMPONENT_H__
 #define __COMPONENT_H__
 
-#include <memory>
 #include <string>
 
-#include "GameObject.hpp"
-
+class GameObject;
 class Component
 {
 private:
 public:
-  Component() = delete;
-  Component(uint64_t id, GameObject* parent);
+  Component();
+  Component(GameObject* parent);
 
-  virtual ~Component() = 0;
+  virtual ~Component();
+
+  virtual bool operator==(Component& rhs);
+  virtual bool operator!=(Component& rhs);
 
   virtual std::string inspect() = 0;
   virtual std::string class_name() = 0;
 
-  virtual bool operator==(const Component& rhs) = 0;
-  virtual bool operator!=(const Component& rhs) = 0;
+  virtual GameObject* parent();
+  virtual Component& parent(GameObject& parent);
 
-  uint64_t get_id();
+  uint64_t id();
 
 protected:
-  uint64_t id;
-  GameObject* parent;
+  uint64_t m_id;
+  GameObject* m_parent;
 
   uint64_t create_id();
 };

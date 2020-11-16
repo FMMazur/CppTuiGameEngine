@@ -9,14 +9,18 @@
 class SceneList : public List<Scene>
 {
 public:
-  SceneList() { }
-  ~SceneList() { }
+  SceneList() {}
+  ~SceneList() {}
 
   bool remove(const std::string& sceneName);
-  // void add(Scene* value);
+  bool remove(Scene* scene);
+  bool remove(uint64_t sceneId);
 
   Scene* get(const std::string& sceneName);
+  Scene* get(uint64_t sceneId);
+
   bool contains(const std::string& sceneName) const;
+  bool contains(uint64_t sceneId) const;
 };
 
 #endif // __SCENELIST_H__

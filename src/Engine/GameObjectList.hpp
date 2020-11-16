@@ -3,14 +3,15 @@
 
 #include <string>
 
+#include "GameObject.hpp"
 #include "List.hpp"
 
-class GameObject;
+// class GameObject;
 class GameObjectList : public List<GameObject>
 {
 public:
-  GameObjectList() { }
-  ~GameObjectList() { }
+  GameObjectList() {}
+  ~GameObjectList() {}
 
   bool remove(const std::string& gameObjectName);
   bool remove(uint64_t gameObjectId);

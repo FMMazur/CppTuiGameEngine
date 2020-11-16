@@ -2,18 +2,18 @@
 
 bool ComponentList::remove(const std::string& componentName)
 {
-  Node<Component>** pp = &this->head;
+  Node<Component>** pp = &this->m_head;
 
   for (Node<Component>* prev = nullptr; *pp != nullptr;
        prev = *pp, *pp = prev->next())
     if ((*pp)->value()->class_name() == componentName) {
       Node<Component>* node = *pp;
 
-      if (node == this->tail)
-        this->tail = prev;
+      if (node == this->m_tail)
+        this->m_tail = prev;
       *pp = node->next();
       delete node;
-      this->count--;
+      this->m_counter--;
       return true;
     }
   return false;
@@ -21,18 +21,18 @@ bool ComponentList::remove(const std::string& componentName)
 
 bool ComponentList::remove(uint64_t componentId)
 {
-  Node<Component>** pp = &this->head;
+  Node<Component>** pp = &this->m_head;
 
   for (Node<Component>* prev = nullptr; *pp != nullptr;
        prev = *pp, *pp = prev->next())
-    if ((*pp)->value()->get_id() == componentId) {
+    if ((*pp)->value()->id() == componentId) {
       Node<Component>* node = *pp;
 
-      if (node == this->tail)
-        this->tail = prev;
+      if (node == this->m_tail)
+        this->m_tail = prev;
       *pp = node->next();
       delete node;
-      this->count--;
+      this->m_counter--;
       return true;
     }
   return false;
@@ -40,7 +40,7 @@ bool ComponentList::remove(uint64_t componentId)
 
 Component* ComponentList::get(const std::string& componentName)
 {
-  for (Node<Component>* node = this->head; node != nullptr;
+  for (Node<Component>* node = this->m_head; node != nullptr;
        node = node->next()) {
     if (node->value()->class_name() == componentName)
       return node->value();
@@ -51,9 +51,14 @@ Component* ComponentList::get(const std::string& componentName)
 
 Component* ComponentList::get(uint64_t componentId)
 {
-  for (Node<Component>* node = this->head; node != nullptr;
+  if (componentId == 0)
+    return this->m_head->value();
+  if (componentId == this->m_counter - 1)
+    return this->m_tail->value();
+
+  for (Node<Component>* node = this->m_head; node != nullptr;
        node = node->next()) {
-    if (node->value()->get_id() == componentId)
+    if (node->value()->id() == componentId)
       return node->value();
   }
 
@@ -62,7 +67,8 @@ Component* ComponentList::get(uint64_t componentId)
 
 bool ComponentList::contains(const std::string& componentName) const
 {
-  for (Node<Component>* node = this->head; node != nullptr; node = node->next())
+  for (Node<Component>* node = this->m_head; node != nullptr;
+       node = node->next())
     if (node->value()->class_name() == componentName)
       return true;
   return false;
@@ -70,8 +76,9 @@ bool ComponentList::contains(const std::string& componentName) const
 
 bool ComponentList::contains(uint64_t componentId) const
 {
-  for (Node<Component>* node = this->head; node != nullptr; node = node->next())
-    if (node->value()->get_id() == componentId)
+  for (Node<Component>* node = this->m_head; node != nullptr;
+       node = node->next())
+    if (node->value()->id() == componentId)
       return true;
   return false;
 }

@@ -6,6 +6,7 @@ class Node
 {
 public:
   Node(T* value);
+  ~Node();
 
   T* value() { return this->m_value; }
   Node<T>* next() { return this->m_next; }

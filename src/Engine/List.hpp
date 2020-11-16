@@ -30,14 +30,14 @@ public:
   template<typename F>
   bool contains(F) const;
   template<typename Func, typename... Args>
-  List<T>* iterate(Func, Args...) const;
+  List<T>& iterate(Func, Args...) const;
 
   bool operator==(const List<T>& rhs) const;
 
 protected:
-  Node<T>* head;
-  Node<T>* tail;
-  int count;
+  Node<T>* m_head;
+  Node<T>* m_tail;
+  uint64_t m_counter;
 };
 
 #include "List.tpp"
