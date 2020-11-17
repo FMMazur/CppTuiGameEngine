@@ -5,11 +5,16 @@ Felipe Muñoz Mazur
 
 ## Linux
 ### Build instructions:
+#### Ninja
 ```sh
-mkdir build
 cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -S . -B build
 ninja -C build # builds everything
 ninja -C build tp1_ui_test # build tests
+```
+#### Makefile
+```sh
+cmake -S . -B build
+make -C build
 ```
 
 ### Run tests:
