@@ -1,7 +1,7 @@
 # Author
 Felipe Muñoz Mazur
 
-*Needs at least c++ 17*
+**Needs at least c++ 17**
 
 ## Linux
 ### Build instructions:
