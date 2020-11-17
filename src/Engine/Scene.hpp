@@ -43,10 +43,10 @@ public:
   void inspection(std::stringstream& ss, size_t tabs = 0);
 
 protected:
+  uint64_t m_id;
   std::string m_name;
   GameObjectList m_objects;
 
-  uint64_t m_id;
   uint64_t create_id();
 };
 

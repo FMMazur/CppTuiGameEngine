@@ -10,6 +10,7 @@
 Scene::Scene(const std::string& name)
     : m_id(create_id())
     , m_name(name)
+    , m_objects()
 {
   GameObject* cube = new GameObject("Cube", this);
   GameObject* light = new GameObject("Light", this);

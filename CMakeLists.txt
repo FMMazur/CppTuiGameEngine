@@ -5,6 +5,8 @@ project(tp1_ui
   VERSION 0.1.0
 )
 
+set(WARNINGS -Wall -Wpedantic -Wno-delete-incomplete -Wno-delete-non-virtual-dtor)
+
 # --- Fetch      --------------------------------------------------------------
 include(FetchContent)
 
@@ -50,7 +52,7 @@ set_target_properties(${LIBRARY_NAME} PROPERTIES CXX_STANDARD 17)
 
 include_directories("${CMAKE_SOURCE_DIR}/src/Engine" "${CMAKE_SOURCE_DIR}/deps")
 target_include_directories(${LIBRARY_NAME} PUBLIC src/Engine deps)
-
+target_compile_options(${LIBRARY_NAME} PRIVATE ${WARNINGS})
 
 add_executable(tp1_ui
   src/main.cpp

@@ -17,8 +17,8 @@ int main(int argc, const char* argv[])
   auto screen = Screen::Create(Dimension::Full(), Dimension::Fit(document));
   Render(screen, document);
 
-  GameObject* go = new GameObject();
-  Mesh* mesh = new Mesh(go, std::vector<Vertex>(), std::vector<Texture>());
+  GameObject* player = new GameObject("player");
+  Mesh* mesh = new Mesh(player, std::vector<Vertex>(), std::vector<Texture>());
 
   {
     auto textures = mesh->textures();

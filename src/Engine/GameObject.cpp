@@ -5,19 +5,21 @@
 #include "Transform.hpp"
 
 GameObject::GameObject(std::string name)
-    : m_childs()
-    , m_id(create_id())
+    : m_id(create_id())
     , m_name(name)
     , m_parent()
+    , m_childs()
+    , m_components()
 {
   this->m_components.add(this, new Transform());
 }
 
 GameObject::GameObject(std::string name, GameObjectParent parent)
-    : m_childs()
-    , m_id(create_id())
+    : m_id(create_id())
     , m_name(name)
     , m_parent(parent)
+    , m_childs()
+    , m_components()
 {
   std::visit(
       [&](auto&& parent) {

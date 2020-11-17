@@ -99,8 +99,7 @@ T* List<T>::get(F index)
 }
 
 template<typename T>
-template<typename F>
-bool List<T>::contains(F value) const
+bool List<T>::contains(const T& value)
 {
   for (Node<T>* node = this->m_head; node != nullptr; node = node->next())
     if (node->value() == value)

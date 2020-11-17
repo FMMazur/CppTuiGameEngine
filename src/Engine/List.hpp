@@ -28,12 +28,10 @@ public:
 
   template<typename F>
   T* get(F);
-  template<typename F>
-  bool contains(F) const;
   template<typename Func = void(T*, ...), typename... Args>
   void iterate(Func, Args...);
 
-  virtual bool contains(const T& value) { return false; }
+  virtual bool contains(const T& value);
   bool operator==(const List<T>& rhs) const;
 
   virtual std::string inspect();

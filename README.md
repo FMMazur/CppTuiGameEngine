@@ -1,4 +1,7 @@
-# Author
+[repository](https://github.com/FMMazur/CppTuiGameEngine)
+
+
+## Author
 Felipe Muñoz Mazur
 
 **Needs at least c++ 17**
@@ -21,6 +24,7 @@ make -C build
 ```sh
 ./build/tests/tp1_ui_test # run tests
 ./build/tests/tp1_ui_test -s # show success
+./build/tests/tp1_ui_test -h # show help
 ```
 
 #### Check memory leak at linux:
@@ -30,8 +34,10 @@ valgrind --leak-check=yes -s ./build/tests/tp1_ui_test
 
 #### Expected result
 ```sh
+$ valgrind --leak-check=yes -s ./build/tests/tp1_ui_test
+==???== Memcheck, a memory error detector
 ...
-== ??? == ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==???== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 #??? expected to be a number
 ```
 
