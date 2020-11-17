@@ -47,54 +47,54 @@ A little cpp engine for a school work.
 ### Project Info
   * A1 - Game
     * Scene List
-      -[x] add scene
-      -[x] remove scene
-      -[x] remove all scenes
-      -[x] get scene pointer by name
-      -[x] iterate scenes
-    -[x] display game in output
+      * [x] add scene
+      * [x] remove scene
+      * [x] remove all scenes
+      * [x] get scene pointer by name
+      * [x] iterate scenes
+    * [x] display game in output
 
   * A2 - Scene
     -[x] get and change name
     * Game Object List
-      -[x] add new game object
-      -[x] remove game object
-      -[x] remove all game objects
-      -[x] get game object pointer by name
-      -[x] iterate game objects
-    -[x] display scene
+      * [x] add new game object
+      * [x] remove game object
+      * [x] remove all game objects
+      * [x] get game object pointer by name
+      * [x] iterate game objects
+    * [x] display scene
 
   * A3 - Game Object
-    -[x] get and change name
+    * [x] get and change name
     * Game Object List - childs
-      -[x] add new game object
-      -[x] remove game object
-      -[x] remove all game objects
-      -[x] get game object pointer by name
-      -[x] iterate game objects
+      * [x] add new game object
+      * [x] remove game object
+      * [x] remove all game objects
+      * [x] get game object pointer by name
+      * [x] iterate game objects
 
     * Component List
-      -[x] add new component
-      -[x] remove component - (except transform)
-      -[x] remove all components - (except transform)
-      -[x] get component pointer by name
-      -[x] iterate components
+      * [x] add new component
+      * [x] remove component - (except transform)
+      * [x] remove all components - (except transform)
+      * [x] get component pointer by name
+      * [x] iterate components
 
-    -[x] display game object
+    * [x] display game object
 
   * A4 - Component
-    -[x] get class name
-    -[x] display component
+    * [x] get class name
+    * [x] display component
 
   * A5 - tests
-    -[x] Create
-    -[x] Edit
-    -[x] Display
+    * [x] Create
+    * [x] Edit
+    * [x] Display
 
 * Goals
-  -[x] encapsulation
-  -[x] inheritance
-  -[x] polymorphism
+  * [x] encapsulation
+  * [x] inheritance
+  * [x] polymorphism
 
 * Extras
   - Templates
