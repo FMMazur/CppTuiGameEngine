@@ -1,13 +1,24 @@
 #include "Scene.hpp"
 
-Scene::Scene(const char* name)
-    : Scene(std::string(name))
-{}
+#include <sstream>
+
+#include "Camera.hpp"
+#include "GameObject.hpp"
+#include "Light.hpp"
+#include "Mesh.hpp"
 
 Scene::Scene(const std::string& name)
     : m_id(create_id())
     , m_name(name)
-{}
+{
+  GameObject* cube = new GameObject("Cube", this);
+  GameObject* light = new GameObject("Light", this);
+  GameObject* camera = new GameObject("Main Camera", this);
+
+  cube->add(new Mesh());
+  light->add(new Light3f());
+  camera->add(new Camera());
+}
 
 Scene::~Scene() {}
 
@@ -43,13 +54,55 @@ bool Scene::operator==(const Scene& rhs) const
 
 bool Scene::operator!=(const Scene& rhs) const { return !(*this == rhs); }
 
+Scene& Scene::add(GameObject* gameObject)
+{
+  this->m_objects.add(this, gameObject);
+  return *this;
+}
+
+GameObject* Scene::get_object(const std::string& gameObjectName)
+{
+  return this->m_objects.get(gameObjectName);
+}
+
+GameObject* Scene::get_object(uint64_t gameObjectId)
+{
+  return this->m_objects.get(gameObjectId);
+}
+
+Scene& Scene::remove(GameObject* gameObject)
+{
+  this->m_objects.remove(gameObject);
+  return *this;
+}
+
+bool Scene::remove(const std::string& gameObjectName)
+{
+  return this->m_objects.remove(gameObjectName);
+}
+
+Scene& Scene::clear_objects()
+{
+  this->m_objects.clear();
+  return *this;
+}
+
 uint64_t Scene::id() { return this->m_id; }
 
 const std::string& Scene::name() { return this->m_name; }
 
-const GameObjectList& Scene::objects() { return this->m_objects; }
+GameObjectList& Scene::objects() { return this->m_objects; }
 
-void Scene::set_name(const std::string& name) { this->m_name = name; }
+void Scene::name(const std::string& name) { this->m_name = name; }
+
+std::string Scene::inspect()
+{
+  std::stringstream ss;
+  ss << "Scene \"" << this->m_name << "\" contain " << this->m_objects.size()
+     << " objects.";
+
+  return ss.str();
+}
 
 uint64_t Scene::create_id()
 {

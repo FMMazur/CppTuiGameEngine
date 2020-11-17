@@ -15,7 +15,6 @@ public:
   Light(GameObject* parent);
   Light(Color color);
   Light(GameObject* parent, Color color);
-  Light(GameObject* parent, Color& color);
   ~Light();
 
   virtual std::string inspect();
@@ -31,7 +30,7 @@ public:
   Light<VectorType>& diffuse(VectorType diffuse);
   Light<VectorType>& specular(VectorType specular);
 
-private:
+protected:
   Color m_color;
 
   VectorType m_ambient;
@@ -40,6 +39,8 @@ private:
 };
 
 using Light3f = Light<Vector3f>;
-// using Light2f = Light<Vector2f>;
+using Light2f = Light<Vector2f>;
+
+#include "Light.tpp"
 
 #endif // __LIGHT_H__

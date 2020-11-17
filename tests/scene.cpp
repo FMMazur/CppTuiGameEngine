@@ -1,15 +1,103 @@
-#include "Scene.hpp"
 #include "catch2/catch.hpp"
-#include <any>
-#include <memory>
+
+#include "GameObject.hpp"
+#include "Scene.hpp"
 
 TEST_CASE("Scene", "[scene]")
 {
-  SECTION("change name")
+  Scene scene("scene");
+
+  SECTION("creation")
   {
-    Scene t1("t1");
-    t1.set_name("new t1");
-    CHECK(t1.name() == "new t1");
+    CHECK(scene.name() == "scene");
+    CHECK(scene.id() == 0);
+    CHECK(scene.objects().size() == 3);
+  }
+
+  SECTION("name")
+  {
+    SECTION("get") { CHECK(scene.name() == "scene"); }
+
+    SECTION("change")
+    {
+      scene.name("new scene");
+      CHECK(scene.name() == "new scene");
+    }
+  }
+
+  SECTION("game objects")
+  {
+    GameObject* go = new GameObject("Game Object");
+    GameObject* go1 = new GameObject("Game Object 1");
+
+    SECTION("add")
+    {
+      scene.add(go).add(go1);
+
+      CHECK(scene.objects().contains(go));
+      CHECK(scene.objects().contains(go1));
+    }
+
+    SECTION("remove")
+    {
+      scene.add(go).add(go1);
+
+      SECTION("by name")
+      {
+        auto removed = scene.remove("Game Object");
+        CHECK(removed);
+
+        removed = scene.remove("Game Object 1");
+        CHECK(removed);
+      }
+
+      SECTION("by pointer")
+      {
+        auto size = scene.remove(go).objects().size();
+        CHECK(size == 4);
+
+        size = scene.remove(go1).objects().size();
+        CHECK(size == 3);
+      }
+
+      SECTION("all")
+      {
+        auto size = scene.clear_objects().objects().size();
+
+        CHECK(size == 0);
+      }
+    }
+
+    SECTION("get pointer")
+    {
+      scene.add(go).add(go1);
+
+      SECTION("by id")
+      {
+        auto pointer = scene.get_object(go->id());
+        CHECK(pointer == go);
+      }
+
+      SECTION("by name")
+      {
+        auto pointer = scene.get_object(go1->name());
+        CHECK(pointer == go1);
+      }
+    }
+
+    SECTION("iterate")
+    {
+      uint64_t count = 0;
+      scene.objects().iterate([&](GameObject* child) {
+        auto parent = child->parent_scene();
+
+        CHECK_FALSE(parent == nullptr);
+        CHECK(parent->name() == "scene");
+        ++count;
+      });
+
+      CHECK(count == 3);
+    }
   }
 
   SECTION("compare name of two scenes")

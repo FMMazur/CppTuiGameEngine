@@ -21,7 +21,7 @@ public:
     this->m_texture_coord = texture_coord;
   }
 
-private:
+protected:
   Vector3f m_position;
   Vector3f m_normal;
   Vector2f m_texture_coord;

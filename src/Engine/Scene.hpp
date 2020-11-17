@@ -8,7 +8,6 @@
 class Scene
 {
 public:
-  Scene(const char* name);
   Scene(const std::string& name);
   Scene() = delete;
   Scene(const Scene&) = delete;
@@ -24,13 +23,25 @@ public:
   bool operator==(const Scene& rhs) const;
   bool operator!=(const Scene& rhs) const;
 
+  Scene& add(GameObject* gameObject);
+
+  GameObject* get_object(const std::string& gameObjectName);
+  GameObject* get_object(uint64_t gameObjectId);
+
+  Scene& remove(GameObject* gameObject);
+  bool remove(const std::string& gameObjectName);
+
+  Scene& clear_objects(); // Remove all objects
+
   uint64_t id();
   const std::string& name();
-  const GameObjectList& objects();
+  GameObjectList& objects();
 
-  void set_name(const std::string& name);
+  void name(const std::string& name);
 
-private:
+  std::string inspect();
+
+protected:
   std::string m_name;
   GameObjectList m_objects;
 

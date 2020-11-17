@@ -1,5 +1,6 @@
-#include "SceneList.hpp"
 #include "catch2/catch.hpp"
+
+#include "SceneList.hpp"
 
 TEST_CASE("SceneList", "[scene-list]")
 {
@@ -24,13 +25,13 @@ TEST_CASE("SceneList", "[scene-list]")
 
     SECTION("by name")
     {
-      auto contains = list.contains("b");
+      auto contains = list.contains(t2->name());
       CHECK(contains);
     }
 
     SECTION("by id")
     {
-      auto contains = list.contains(13); // "b"
+      auto contains = list.contains(t2->id());
       CHECK(contains);
     }
   }
@@ -49,7 +50,7 @@ TEST_CASE("SceneList", "[scene-list]")
     SECTION("by id")
     {
       // id = 16 because of others creations
-      auto scene = list.get(16);
+      auto scene = list.get(t1->id());
       CHECK(scene == t1);
     }
   }

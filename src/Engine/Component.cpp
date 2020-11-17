@@ -10,8 +10,23 @@ Component::Component(GameObject* parent)
     : m_id(create_id())
     , m_parent(parent)
 {
-  //TODO: add component to parent
+  parent->add(this);
 }
+
+Component::Component(const std::string& name)
+    : m_id(create_id())
+    , m_name(name)
+    , m_parent()
+{}
+
+Component::Component(GameObject* parent, const std::string& name)
+    : m_id(create_id())
+    , m_name(name)
+    , m_parent(parent)
+{
+  parent->add(this);
+}
+
 Component::~Component()
 {
   m_id = 0;
@@ -28,9 +43,17 @@ bool Component::operator!=(Component& rhs) { return !(*this == rhs); }
 
 GameObject* Component::parent() { return this->m_parent; }
 
-Component& Component::parent(GameObject& parent)
+Component& Component::parent(GameObject* parent)
 {
-  this->m_parent = &parent;
+  this->m_parent = parent;
+  return *this;
+}
+
+std::string Component::name() { return this->m_name; }
+
+Component& Component::name(std::string name)
+{
+  this->m_name = name;
   return *this;
 }
 

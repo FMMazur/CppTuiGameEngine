@@ -1,12 +1,13 @@
 #include "List.hpp"
-#include <cassert>
+
+#include <sstream>
 
 template<typename T>
 List<T>::List()
-{
-  this->m_head = this->m_tail = nullptr;
-  this->m_counter = 0;
-}
+    : m_head(nullptr)
+    , m_tail(nullptr)
+    , m_counter(0)
+{}
 
 template<typename T>
 List<T>::~List()
@@ -22,13 +23,19 @@ void List<T>::clear()
 
     this->m_head = node->next();
     delete node;
+
+    --this->m_counter;
   }
+
+  this->m_tail = nullptr;
 }
 
 template<typename T>
 List<T>& List<T>::add(T* value)
 {
-  this->addValue(value);
+  if (!this->contains(value))
+    this->addValue(value);
+
   return *this;
 }
 
@@ -40,7 +47,7 @@ void List<T>::addValue(T* value)
   if (this->m_tail == nullptr)
     this->m_head = node;
   else {
-    this->m_tail->set_next(node);
+    this->m_tail->next(node);
   }
   this->m_tail = node;
   this->m_counter++;
@@ -49,7 +56,8 @@ void List<T>::addValue(T* value)
 template<typename T>
 T* List<T>::get(int index) const
 {
-  assert(index >= 0 && index < this->m_counter);
+  if (index >= 0 && index < this->m_counter)
+    return nullptr;
 
   Node<int>* node = this->m_head;
 
@@ -59,14 +67,14 @@ T* List<T>::get(int index) const
 }
 
 template<typename T>
-template<typename F>
-bool List<T>::remove(F value)
+bool List<T>::remove(T* value)
 {
-  Node<F>** pp = &this->m_head;
+  Node<T>** pp = &this->m_head;
 
-  for (Node<F>* prev = nullptr; *pp != nullptr; prev = *pp, pp = &prev->next)
+  for (Node<T>* prev = nullptr; *pp != nullptr;
+       prev = *pp, pp = prev->next_pointer())
     if ((*pp)->value() == value) {
-      Node<F>* node = *pp;
+      Node<T>* node = *pp;
 
       if (node == this->m_tail)
         this->m_tail = prev;
@@ -79,13 +87,33 @@ bool List<T>::remove(F value)
 }
 
 template<typename T>
+T* List<T>::remove_and_get(T* value)
+{
+  Node<T>** pp = &this->m_head;
+
+  for (Node<T>* prev = nullptr; *pp != nullptr;
+       prev = *pp, pp = prev->next_pointer())
+    if ((*pp)->value() == value) {
+      Node<T>* node = *pp;
+
+      if (node == this->m_tail)
+        this->m_tail = prev;
+      *pp = node->next();
+      this->m_counter--;
+      return value;
+    }
+
+  return nullptr;
+}
+
+template<typename T>
 template<typename F>
 T* List<T>::get(F index)
 {
   Node<F>* node = this->m_head;
 
   for (int i = 0; i < index; ++i)
-    node = node->next;
+    node = node->next();
   return node->value();
 }
 
@@ -93,20 +121,18 @@ template<typename T>
 template<typename F>
 bool List<T>::contains(F value) const
 {
-  for (Node<T>* node = this->m_head; node != nullptr; node = node->next)
+  for (Node<T>* node = this->m_head; node != nullptr; node = node->next())
     if (node->value() == value)
       return true;
   return false;
 }
 
 template<typename T>
-template<typename Func, typename... Args>
-List<T>& List<T>::iterate(Func func, Args... args) const
+template<typename Function, typename... Args>
+void List<T>::iterate(Function function, Args... args)
 {
-  for (Node<T>* node = this->m_head; node != nullptr; node = node->next)
-    func(node->value(), args...);
-
-  return this;
+  for (Node<T>* node = this->m_head; node != nullptr; node = node->next())
+    function(node->value(), args...);
 }
 
 template<typename T>
@@ -127,4 +153,13 @@ bool List<T>::operator==(const List<T>& rhs) const
     return false;
 
   return true;
+}
+
+template<typename T>
+std::string List<T>::inspect()
+{
+  std::stringstream ss;
+  ss << "List contains " << this->m_counter << " items";
+
+  return ss.str();
 }

@@ -29,7 +29,7 @@ public:
   Mesh& vertices(std::vector<Vertex> vertices);
   Mesh& textures(std::vector<Texture> textures);
 
-private:
+protected:
   std::vector<Vertex> m_vertices;
   std::vector<Texture> m_textures;
 };

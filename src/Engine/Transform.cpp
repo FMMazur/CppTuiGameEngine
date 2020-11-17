@@ -72,9 +72,3 @@ std::string Transform::inspect()
 }
 
 std::string Transform::class_name() { return "Transform"; }
-
-bool Transform::operator==(const Component& rhs) { std::abort(); }
-
-bool Transform::operator!=(const Component& rhs) { std::abort(); }
-
-uint64_t Transform::id() { std::abort(); }

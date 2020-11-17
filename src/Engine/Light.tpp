@@ -1,5 +1,4 @@
 #include "Light.hpp"
-
 #include <sstream>
 
 template<class VectorType>
@@ -22,12 +21,6 @@ Light<VectorType>::Light(Color color)
 
 template<class VectorType>
 Light<VectorType>::Light(GameObject* parent, Color color)
-    : Component(parent)
-    , m_color(color)
-{}
-
-template<class VectorType>
-Light<VectorType>::Light(GameObject* parent, Color& color)
     : Component(parent)
     , m_color(color)
 {}

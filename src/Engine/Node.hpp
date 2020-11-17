@@ -12,13 +12,15 @@ public:
   Node<T>* next() { return this->m_next; }
   Node<T>* next() const { return &this->m_next; }
 
-  Node<T>* set_next(Node<T>* value)
+  Node<T>** next_pointer() { return &this->m_next; }
+
+  Node<T>* next(Node<T>* value)
   {
     this->m_next = value;
     return this->m_next;
   }
 
-private:
+protected:
   T* m_value;
   Node<T>* m_next;
 };

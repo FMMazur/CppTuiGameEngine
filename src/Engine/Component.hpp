@@ -9,7 +9,9 @@ class Component
 private:
 public:
   Component();
+  Component(const std::string& name);
   Component(GameObject* parent);
+  Component(GameObject* parent, const std::string& name);
 
   virtual ~Component();
 
@@ -20,14 +22,19 @@ public:
   virtual std::string class_name() = 0;
 
   virtual GameObject* parent();
-  virtual Component& parent(GameObject& parent);
+  virtual Component& parent(GameObject* parent);
+
+  virtual std::string name();
+  virtual Component& name(std::string name);
 
   uint64_t id();
 
 protected:
   uint64_t m_id;
+  std::string m_name;
   GameObject* m_parent;
 
+private:
   uint64_t create_id();
 };
 

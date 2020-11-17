@@ -39,7 +39,7 @@ Vector3<T>::~Vector3()
 template<typename T>
 bool Vector3<T>::operator==(const Vector3<T>& vec3)
 {
-  return this->x == vec.x && this->y == vec.y && this->z == vec.z;
+  return this->x == vec3.x && this->y == vec3.y && this->z == vec3.z;
 }
 
 template<typename T>

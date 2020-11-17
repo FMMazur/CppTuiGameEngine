@@ -25,12 +25,7 @@ public:
   std::string inspect();
   std::string class_name();
 
-  bool operator==(const Component& rhs);
-  bool operator!=(const Component& rhs);
-
-  uint64_t id();
-
-private:
+protected:
   Vector3f m_position;
   Vector3f m_scale;
   Vector3f m_rotation;

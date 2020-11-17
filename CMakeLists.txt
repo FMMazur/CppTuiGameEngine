@@ -32,7 +32,7 @@ set(ENGINE_SOURCES
   src/Engine/Component.cpp
   src/Engine/Game.cpp
   src/Engine/GameObject.cpp
-  src/Engine/Light.cpp
+  src/Engine/Light.hpp
   src/Engine/Mesh.cpp
   src/Engine/Scene.cpp
   src/Engine/Transform.cpp

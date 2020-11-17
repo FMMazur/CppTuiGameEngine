@@ -50,8 +50,9 @@ struct Color
   {
     std::stringstream ss;
 
-    ss << "(" << this->r << ", " << this->g << ", " << this->b << ", "
-       << this->a << ")";
+    ss << "(" << std::to_string(this->r) << ", " << std::to_string(this->g)
+       << ", " << std::to_string(this->b) << ", " << std::to_string(this->a)
+       << ")";
 
     return ss.str();
   }

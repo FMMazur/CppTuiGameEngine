@@ -6,6 +6,8 @@ set(TEST_SOURCES
   test.cpp
   components.cpp
   
+  game-object.cpp
+
   scene.cpp
   scene-list.cpp
 )
