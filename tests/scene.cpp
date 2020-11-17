@@ -27,19 +27,24 @@ TEST_CASE("Scene", "[scene]")
 
   SECTION("game objects")
   {
-    GameObject* go = new GameObject("Game Object");
-    GameObject* go1 = new GameObject("Game Object 1");
-
     SECTION("add")
     {
+      GameObject* go = new GameObject("Game Object");
+      GameObject* go1 = new GameObject("Game Object 1");
+
       scene.add(go).add(go1);
 
       CHECK(scene.objects().contains(go));
       CHECK(scene.objects().contains(go1));
+
+      scene.clear_objects();
     }
 
     SECTION("remove")
     {
+      GameObject* go = new GameObject("Game Object");
+      GameObject* go1 = new GameObject("Game Object 1");
+
       scene.add(go).add(go1);
 
       SECTION("by name")
@@ -66,10 +71,15 @@ TEST_CASE("Scene", "[scene]")
 
         CHECK(size == 0);
       }
+
+      scene.clear_objects();
     }
 
     SECTION("get pointer")
     {
+      GameObject* go = new GameObject("Game Object");
+      GameObject* go1 = new GameObject("Game Object 1");
+
       scene.add(go).add(go1);
 
       SECTION("by id")
@@ -83,6 +93,8 @@ TEST_CASE("Scene", "[scene]")
         auto pointer = scene.get_object(go1->name());
         CHECK(pointer == go1);
       }
+
+      scene.clear_objects();
     }
 
     SECTION("iterate")

@@ -18,6 +18,8 @@ public:
   virtual bool operator==(Component& rhs);
   virtual bool operator!=(Component& rhs);
 
+  virtual void inspection(std::stringstream& ss, size_t tabs = 0);
+
   virtual std::string inspect() = 0;
   virtual std::string class_name() = 0;
 

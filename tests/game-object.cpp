@@ -122,6 +122,9 @@ TEST_CASE("Game Object", "[game-object]")
       auto size = go.add(mesh).add(camera).add(transform).components().size();
 
       CHECK(size == 3);
+
+      delete transform; // bcs cant enter in the list needs to delete manually
+      go.clear();
     }
 
     SECTION("remove")
@@ -152,6 +155,8 @@ TEST_CASE("Game Object", "[game-object]")
         CHECK(go.remove(mesh).components().size() == 2);
         CHECK(go.remove(camera).components().size() == 1);
       }
+
+      go.clear();
     }
 
     SECTION("get pointer")
@@ -176,6 +181,8 @@ TEST_CASE("Game Object", "[game-object]")
 
       CHECK(count == 3);
       CHECK(count == go.components().size());
+
+      go.clear();
     }
 
     SECTION("clear")
@@ -198,6 +205,8 @@ TEST_CASE("Game Object", "[game-object]")
       CHECK(
           go.inspect()
           == "Game Object \"Game Object\" contain 0 childs and 1 components.");
+
+      go.clear();
     }
   }
 }

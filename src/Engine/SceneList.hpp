@@ -6,7 +6,7 @@
 #include "List.hpp"
 #include "Scene.hpp"
 
-class SceneList : public List<Scene>
+class SceneList : public List<Scene*>
 {
 public:
   SceneList() {}

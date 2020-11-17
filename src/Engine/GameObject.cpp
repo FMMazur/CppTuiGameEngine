@@ -163,6 +163,20 @@ std::string GameObject::inspect()
   return ss.str();
 }
 
+void GameObject::inspection(std::stringstream& ss, size_t tabs)
+{
+  if (tabs)
+    for (size_t i = 0; i < tabs; i++) {
+      ss << "\t";
+    }
+
+  ss << this->inspect() << std::endl;
+
+  this->m_childs.iterate([&](GameObject* go) { go->inspection(ss, tabs + 1); });
+  this->m_components.iterate(
+      [&](Component* component) { component->inspection(ss, tabs + 1); });
+}
+
 uint64_t GameObject::id() { return this->m_id; }
 
 uint64_t GameObject::create_id()

@@ -19,12 +19,12 @@ bool ComponentList::remove(const std::string& componentName)
     return false;
   }
 
-  Node<Component>** pp = &this->m_head;
+  Node<Component*>** pp = &this->m_head;
 
-  for (Node<Component>* prev = nullptr; *pp != nullptr;
+  for (Node<Component*>* prev = nullptr; *pp != nullptr;
        prev = *pp, pp = prev->next_pointer())
     if ((*pp)->value()->class_name() == componentName) {
-      Node<Component>* node = *pp;
+      Node<Component*>* node = *pp;
 
       if (node == this->m_tail)
         this->m_tail = prev;
@@ -38,13 +38,13 @@ bool ComponentList::remove(const std::string& componentName)
 
 bool ComponentList::remove(uint64_t componentId)
 {
-  Node<Component>** pp = &this->m_head;
+  Node<Component*>** pp = &this->m_head;
 
-  for (Node<Component>* prev = nullptr; *pp != nullptr;
+  for (Node<Component*>* prev = nullptr; *pp != nullptr;
        prev = *pp, pp = prev->next_pointer()) {
     Component* now = (*pp)->value();
     if (now->id() == componentId && now->class_name() != "Transform") {
-      Node<Component>* node = *pp;
+      Node<Component*>* node = *pp;
 
       if (node == this->m_tail)
         this->m_tail = prev;
@@ -64,7 +64,7 @@ bool ComponentList::remove(Component* component)
 
 Component* ComponentList::get(const std::string& componentName)
 {
-  for (Node<Component>* node = this->m_head; node != nullptr;
+  for (Node<Component*>* node = this->m_head; node != nullptr;
        node = node->next()) {
     if (node->value()->class_name() == componentName)
       return node->value();
@@ -80,7 +80,7 @@ Component* ComponentList::get(uint64_t componentId)
   if (componentId == this->m_counter - 1)
     return this->m_tail->value();
 
-  for (Node<Component>* node = this->m_head; node != nullptr;
+  for (Node<Component*>* node = this->m_head; node != nullptr;
        node = node->next()) {
     if (node->value()->id() == componentId)
       return node->value();
@@ -91,7 +91,7 @@ Component* ComponentList::get(uint64_t componentId)
 
 bool ComponentList::contains(const std::string& componentName) const
 {
-  for (Node<Component>* node = this->m_head; node != nullptr;
+  for (Node<Component*>* node = this->m_head; node != nullptr;
        node = node->next())
     if (node->value()->class_name() == componentName)
       return true;
@@ -100,7 +100,7 @@ bool ComponentList::contains(const std::string& componentName) const
 
 bool ComponentList::contains(uint64_t componentId) const
 {
-  for (Node<Component>* node = this->m_head; node != nullptr;
+  for (Node<Component*>* node = this->m_head; node != nullptr;
        node = node->next())
     if (node->value()->id() == componentId)
       return true;
@@ -114,11 +114,11 @@ bool ComponentList::contains(Component* value) const
 
 void ComponentList::clear()
 {
-  Node<Component>* component = this->m_head->next();
+  Node<Component*>* component = this->m_head->next();
   this->m_head->next(nullptr);
 
   while (component != nullptr) {
-    Node<Component>* node = component;
+    Node<Component*>* node = component;
 
     component = node->next();
     delete node;

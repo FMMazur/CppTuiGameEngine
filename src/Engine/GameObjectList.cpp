@@ -26,12 +26,12 @@ GameObjectList& GameObjectList::add(GameObject* gameObjectParent,
 
 bool GameObjectList::remove(const std::string& gameObjectName)
 {
-  Node<GameObject>** pp = &this->m_head;
+  Node<GameObject*>** pp = &this->m_head;
 
-  for (Node<GameObject>* prev = nullptr; *pp != nullptr;
+  for (Node<GameObject*>* prev = nullptr; *pp != nullptr;
        prev = *pp, pp = prev->next_pointer())
     if ((*pp)->value()->name() == gameObjectName) {
-      Node<GameObject>* node = *pp;
+      Node<GameObject*>* node = *pp;
 
       if (node == this->m_tail)
         this->m_tail = prev;
@@ -45,12 +45,12 @@ bool GameObjectList::remove(const std::string& gameObjectName)
 
 bool GameObjectList::remove(uint64_t gameObjectId)
 {
-  Node<GameObject>** pp = &this->m_head;
+  Node<GameObject*>** pp = &this->m_head;
 
-  for (Node<GameObject>* prev = nullptr; *pp != nullptr;
+  for (Node<GameObject*>* prev = nullptr; *pp != nullptr;
        prev = *pp, pp = prev->next_pointer())
     if ((*pp)->value()->id() == gameObjectId) {
-      Node<GameObject>* node = *pp;
+      Node<GameObject*>* node = *pp;
 
       if (node == this->m_tail)
         this->m_tail = prev;
@@ -69,7 +69,7 @@ bool GameObjectList::remove(GameObject* gameObject)
 
 GameObject* GameObjectList::get(const std::string& gameObjectName)
 {
-  for (Node<GameObject>* node = this->m_head; node != nullptr;
+  for (Node<GameObject*>* node = this->m_head; node != nullptr;
        node = node->next()) {
     if (node->value()->name() == gameObjectName)
       return node->value();
@@ -85,7 +85,7 @@ GameObject* GameObjectList::get(uint64_t gameObjectId)
   if (gameObjectId == this->m_counter - 1)
     return this->m_tail->value();
 
-  for (Node<GameObject>* node = this->m_head; node != nullptr;
+  for (Node<GameObject*>* node = this->m_head; node != nullptr;
        node = node->next()) {
     if (node->value()->id() == gameObjectId)
       return node->value();
@@ -96,7 +96,7 @@ GameObject* GameObjectList::get(uint64_t gameObjectId)
 
 bool GameObjectList::contains(const std::string& gameObjectName) const
 {
-  for (Node<GameObject>* node = this->m_head; node != nullptr;
+  for (Node<GameObject*>* node = this->m_head; node != nullptr;
        node = node->next())
     if (node->value()->name() == gameObjectName)
       return true;
@@ -105,7 +105,7 @@ bool GameObjectList::contains(const std::string& gameObjectName) const
 
 bool GameObjectList::contains(uint64_t gameObjectId) const
 {
-  for (Node<GameObject>* node = this->m_head; node != nullptr;
+  for (Node<GameObject*>* node = this->m_head; node != nullptr;
        node = node->next())
     if (node->value()->id() == gameObjectId)
       return true;

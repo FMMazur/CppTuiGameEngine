@@ -47,9 +47,8 @@ Comparator Scene::compare(const Scene& scene)
 
 bool Scene::operator==(const Scene& rhs) const
 {
-  return this->m_name == rhs.m_name /* && this->m_id == rhs.m_id
-      && this->m_objects == rhs.m_objects */
-      ;
+  return this->m_name == rhs.m_name && this->m_id == rhs.m_id
+      && this->m_objects == rhs.m_objects;
 }
 
 bool Scene::operator!=(const Scene& rhs) const { return !(*this == rhs); }
@@ -102,6 +101,19 @@ std::string Scene::inspect()
      << " objects.";
 
   return ss.str();
+}
+
+void Scene::inspection(std::stringstream& ss, size_t tabs)
+{
+  if (tabs)
+    for (size_t i = 0; i < tabs; i++) {
+      ss << "\t";
+    }
+
+  ss << this->inspect() << std::endl;
+
+  this->objects().iterate(
+      [&](GameObject* go) { go->inspection(ss, tabs + 1); });
 }
 
 uint64_t Scene::create_id()

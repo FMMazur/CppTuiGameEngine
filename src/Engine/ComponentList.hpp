@@ -7,7 +7,7 @@
 #include "List.hpp"
 
 class GameObject;
-class ComponentList : public List<Component>
+class ComponentList : public List<Component*>
 {
 public:
   ComponentList() {}

@@ -5,10 +5,10 @@ template<typename T>
 class Node
 {
 public:
-  Node(T* value);
+  Node(const T& value);
   ~Node();
 
-  T* value() { return this->m_value; }
+  T value() { return this->m_value; }
   Node<T>* next() { return this->m_next; }
   Node<T>* next() const { return &this->m_next; }
 
@@ -21,7 +21,7 @@ public:
   }
 
 protected:
-  T* m_value;
+  T m_value;
   Node<T>* m_next;
 };
 

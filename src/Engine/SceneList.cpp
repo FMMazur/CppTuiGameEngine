@@ -2,12 +2,12 @@
 
 bool SceneList::remove(const std::string& sceneName)
 {
-  Node<Scene>** temp = &this->m_head;
+  Node<Scene*>** temp = &this->m_head;
 
-  for (Node<Scene>* prev = nullptr; *temp != nullptr;
+  for (Node<Scene*>* prev = nullptr; *temp != nullptr;
        prev = *temp, *temp = prev->next())
     if ((*temp)->value()->name() == sceneName) {
-      Node<Scene>* node = *temp;
+      Node<Scene*>* node = *temp;
 
       if (node == this->m_tail)
         this->m_tail = prev;
@@ -21,12 +21,12 @@ bool SceneList::remove(const std::string& sceneName)
 
 bool SceneList::remove(Scene* scene)
 {
-  Node<Scene>** temp = &this->m_head;
+  Node<Scene*>** temp = &this->m_head;
 
-  for (Node<Scene>* prev = nullptr; *temp != nullptr;
-       prev = *temp, *temp = prev->next())
+  for (Node<Scene*>* prev = nullptr; *temp != nullptr;
+       prev = *temp, temp = prev->next_pointer())
     if ((*temp)->value() == scene) {
-      Node<Scene>* node = *temp;
+      Node<Scene*>* node = *temp;
 
       if (node == this->m_tail)
         this->m_tail = prev;
@@ -40,12 +40,12 @@ bool SceneList::remove(Scene* scene)
 
 bool SceneList::remove(uint64_t sceneId)
 {
-  Node<Scene>** temp = &this->m_head;
+  Node<Scene*>** temp = &this->m_head;
 
-  for (Node<Scene>* prev = nullptr; *temp != nullptr;
+  for (Node<Scene*>* prev = nullptr; *temp != nullptr;
        prev = *temp, *temp = prev->next())
     if ((*temp)->value()->id() == sceneId) {
-      Node<Scene>* node = *temp;
+      Node<Scene*>* node = *temp;
 
       if (node == this->m_tail)
         this->m_tail = prev;
@@ -60,7 +60,8 @@ bool SceneList::remove(uint64_t sceneId)
 
 Scene* SceneList::get(const std::string& sceneName)
 {
-  for (Node<Scene>* node = this->m_head; node != nullptr; node = node->next()) {
+  for (Node<Scene*>* node = this->m_head; node != nullptr;
+       node = node->next()) {
     if (node->value()->name() == sceneName)
       return node->value();
   }
@@ -75,7 +76,8 @@ Scene* SceneList::get(uint64_t sceneId)
   if (sceneId == this->m_counter - 1)
     return this->m_tail->value();
 
-  for (Node<Scene>* node = this->m_head; node != nullptr; node = node->next()) {
+  for (Node<Scene*>* node = this->m_head; node != nullptr;
+       node = node->next()) {
     if (node->value()->id() == sceneId)
       return node->value();
   }
@@ -85,7 +87,7 @@ Scene* SceneList::get(uint64_t sceneId)
 
 bool SceneList::contains(const std::string& sceneName) const
 {
-  for (Node<Scene>* node = this->m_head; node != nullptr; node = node->next())
+  for (Node<Scene*>* node = this->m_head; node != nullptr; node = node->next())
     if (node->value()->name() == sceneName)
       return true;
   return false;
@@ -93,7 +95,7 @@ bool SceneList::contains(const std::string& sceneName) const
 
 bool SceneList::contains(uint64_t sceneId) const
 {
-  for (Node<Scene>* node = this->m_head; node != nullptr; node = node->next())
+  for (Node<Scene*>* node = this->m_head; node != nullptr; node = node->next())
     if (node->value()->id() == sceneId)
       return true;
   return false;

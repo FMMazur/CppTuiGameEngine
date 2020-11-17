@@ -4,12 +4,17 @@ enable_testing()
 
 set(TEST_SOURCES
   test.cpp
+
   components.cpp
+  component-list.cpp
   
   game-object.cpp
+  game-object-list.cpp
 
   scene.cpp
   scene-list.cpp
+
+  game.cpp
 )
 
 include_directories("../src/Engine")

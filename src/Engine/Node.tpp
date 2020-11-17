@@ -1,15 +1,21 @@
 #include "Node.hpp"
 
+#include <type_traits>
+
 template<typename T>
-Node<T>::Node(T* value)
-{
-  this->m_value = value;
-  this->m_next = nullptr;
-}
+Node<T>::Node(const T& value)
+    : m_value(value)
+    , m_next(nullptr)
+{}
 
 template<typename T>
 Node<T>::~Node()
 {
-  delete m_value;
+  if constexpr (std::is_pointer_v<T>) {
+    if (m_value) {
+      delete m_value;
+    }
+  }
+
   m_next = nullptr;
 }

@@ -41,6 +41,16 @@ bool Component::operator==(Component& rhs)
 
 bool Component::operator!=(Component& rhs) { return !(*this == rhs); }
 
+void Component::inspection(std::stringstream& ss, size_t tabs)
+{
+  if (tabs)
+    for (size_t i = 0; i < tabs; i++) {
+      ss << "\t";
+    }
+
+  ss << this->inspect() << std::endl;
+}
+
 GameObject* Component::parent() { return this->m_parent; }
 
 Component& Component::parent(GameObject* parent)

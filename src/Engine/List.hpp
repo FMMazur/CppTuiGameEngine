@@ -18,14 +18,13 @@ public:
   // List& operator=(const List&) = delete;
 
   virtual void clear();
-  List<T>& add(T* value);
-  void addValue(T* value);
+  List<T>& add(const T& value);
+  void addValue(const T& value);
   int size() const { return this->m_counter; }
 
   T* get(int) const;
 
-  virtual bool remove(T* value);
-  virtual T* remove_and_get(T* value);
+  virtual bool remove(const T& value);
 
   template<typename F>
   T* get(F);
@@ -34,7 +33,7 @@ public:
   template<typename Func = void(T*, ...), typename... Args>
   void iterate(Func, Args...);
 
-  virtual bool contains(T* value) { return false; }
+  virtual bool contains(const T& value) { return false; }
   bool operator==(const List<T>& rhs) const;
 
   virtual std::string inspect();

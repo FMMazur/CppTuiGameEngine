@@ -12,7 +12,8 @@ List<T>::List()
 template<typename T>
 List<T>::~List()
 {
-  this->clear();
+  if (this->m_counter)
+    this->clear();
 }
 
 template<typename T>
@@ -31,7 +32,7 @@ void List<T>::clear()
 }
 
 template<typename T>
-List<T>& List<T>::add(T* value)
+List<T>& List<T>::add(const T& value)
 {
   if (!this->contains(value))
     this->addValue(value);
@@ -40,7 +41,7 @@ List<T>& List<T>::add(T* value)
 }
 
 template<typename T>
-void List<T>::addValue(T* value)
+void List<T>::addValue(const T& value)
 {
   Node<T>* node = new Node<T>(value);
 
@@ -67,7 +68,7 @@ T* List<T>::get(int index) const
 }
 
 template<typename T>
-bool List<T>::remove(T* value)
+bool List<T>::remove(const T& value)
 {
   Node<T>** pp = &this->m_head;
 
@@ -84,26 +85,6 @@ bool List<T>::remove(T* value)
       return true;
     }
   return false;
-}
-
-template<typename T>
-T* List<T>::remove_and_get(T* value)
-{
-  Node<T>** pp = &this->m_head;
-
-  for (Node<T>* prev = nullptr; *pp != nullptr;
-       prev = *pp, pp = prev->next_pointer())
-    if ((*pp)->value() == value) {
-      Node<T>* node = *pp;
-
-      if (node == this->m_tail)
-        this->m_tail = prev;
-      *pp = node->next();
-      this->m_counter--;
-      return value;
-    }
-
-  return nullptr;
 }
 
 template<typename T>

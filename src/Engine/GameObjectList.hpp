@@ -9,7 +9,7 @@
 class GameObject;
 class Scene;
 
-class GameObjectList : public List<GameObject>
+class GameObjectList : public List<GameObject*>
 {
 public:
   GameObjectList() {}

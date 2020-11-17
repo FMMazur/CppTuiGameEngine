@@ -53,6 +53,7 @@ public:
   ComponentList& components();
 
   virtual std::string inspect();
+  virtual void inspection(std::stringstream& ss, size_t tabs = 0);
 
   uint64_t id();
 

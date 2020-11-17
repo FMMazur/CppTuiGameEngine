@@ -28,8 +28,12 @@
 
 # Executables
 *.exe
-*.out
+*.out*
 *.app
+
+*.log
+
+*.pdf
 
 build/
 .vscode/

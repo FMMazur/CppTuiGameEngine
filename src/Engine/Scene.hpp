@@ -40,6 +40,7 @@ public:
   void name(const std::string& name);
 
   std::string inspect();
+  void inspection(std::stringstream& ss, size_t tabs = 0);
 
 protected:
   std::string m_name;
